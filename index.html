@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manayush</title>
+  <meta name="description" content="Digital mental health and psychological support system for students in higher education." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="site-header glass">
+    <div class="container headwrap">
+      <div class="brand">
+        <img src="favicon.svg" alt="" class="logo">
+        <div>
+          <h1>Manayush<h1>
+          <p class="tagline" data-i18n="tagline">Digital Psychological Support for Students</p>
+        </div>
+      </div>
+      <nav class="nav">
+        <button class="nav-link active" data-target="home" data-i18n="nav.home">Home</button>
+        <button class="nav-link" data-target="chat" data-i18n="nav.chat">AI First‑Aid</button>
+        <button class="nav-link" data-target="booking" data-i18n="nav.booking">Book Session</button>
+        <button class="nav-link" data-target="resources" data-i18n="nav.resources">Resources</button>
+        <button class="nav-link" data-target="peer" data-i18n="nav.peer">Peer Support</button>
+        <button class="nav-link" data-target="admin" data-i18n="nav.admin">Admin Dashboard</button>
+        <button class="nav-link" data-target="about" data-i18n="nav.about">About</button>
+      </nav>
+      <div class="actions">
+        <select id="langSelect" aria-label="Language">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+        </select>
+        <button id="panicBtn" class="btn danger" data-i18n="panic">Need Help?</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Home / Hero -->
+    <section id="home" class="route active">
+      <div class="hero">
+        <div class="hero-text">
+          <h2 data-i18n="hero.title">You’re not alone. Support is one click away.</h2>
+          <p class="muted" data-i18n="hero.desc">
+            Confidential, stigma‑free tools to help you manage stress, anxiety, sleep, and academic pressure - designed for your campus.
+          </p>
+          <div class="hero-actions">
+            <button class="btn primary" data-jump="chat" data-i18n="hero.cta1">Try AI First‑Aid</button>
+            <button class="btn" data-jump="booking" data-i18n="hero.cta2">Book a Counsellor</button>
+          </div>
+          <ul class="features">
+            <li>🧠 <span data-i18n="feat.ai">AI‑guided coping strategies</span></li>
+            <li>🔒 <span data-i18n="feat.confidential">Confidential appointments</span></li>
+            <li>🌐 <span data-i18n="feat.local">Regional languages & context</span></li>
+            <li>📊 <span data-i18n="feat.analytics">Anonymous campus analytics</span></li>
+          </ul>
+        </div>
+        <div class="hero-card glass">
+          <h3 data-i18n="hero.quickCheck">Quick Check‑In</h3>
+          <p class="muted" data-i18n="hero.quickCheckDesc">How are you feeling today?</p>
+          <div class="mood-grid">
+            <button class="mood" data-mood="calm">🙂</button>
+            <button class="mood" data-mood="stressed">😣</button>
+            <button class="mood" data-mood="anxious">😟</button>
+            <button class="mood" data-mood="sad">😢</button>
+            <button class="mood" data-mood="angry">😡</button>
+            <button class="mood" data-mood="tired">🥱</button>
+          </div>
+          <p id="moodMsg" class="muted center"></p>
+          <button class="btn wfull" data-jump="chat" data-i18n="hero.quickCheckCTA">Get tips</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI First-Aid Chat -->
+    <section id="chat" class="route">
+      <div class="grid-2">
+        <div class="glass panel">
+          <h3>AI First‑Aid</h3>
+          <div id="chatWindow" class="chat-window" role="log" aria-live="polite"></div>
+          <form id="chatForm" class="chat-input" autocomplete="off">
+            <input id="chatText" type="text" placeholder="Type how you’re feeling…" aria-label="Your message" required />
+            <button class="btn primary" type="submit">Send</button>
+          </form>
+          <div class="chips">
+            <button class="chip" data-prompt="I feel overwhelmed by exams">Exams</button>
+            <button class="chip" data-prompt="I have trouble sleeping">Sleep</button>
+            <button class="chip" data-prompt="I feel lonely">Lonely</button>
+            <button class="chip" data-prompt="I’m anxious about placements">Placements</button>
+          </div>
+          <p class="disclaimer">
+            ⚠️ This is first‑aid guidance, not a diagnosis. If you’re in crisis, use “Need Help?” at the top.
+          </p>
+        </div>
+        <div class="panel">
+          <h4 data-i18n="chat.selfcare">Self‑care tools</h4>
+          <div class="tools">
+            <button class="btn" id="timerBtn">3‑Minute Breathing Timer</button>
+            <button class="btn" id="groundBtn">5‑4‑3‑2‑1 Grounding</button>
+            <button class="btn" id="journalBtn">Open Journal</button>
+          </div>
+          <div id="toolArea" class="tool-area"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking -->
+    <section id="booking" class="route">
+      <div class="glass panel">
+        <h3 data-i18n="booking.title">Confidential Booking</h3>
+        <p class="muted" data-i18n="booking.desc">Book a private session with your campus counsellor or request a helpline callback.</p>
+        <form id="bookForm" class="form">
+          <div class="grid-2">
+            <label>First Name
+              <input type="text" name="firstName" required>
+            </label>
+            <label>Last Name
+              <input type="text" name="lastName" required>
+            </label>
+          </div>
+          <div class="grid-2">
+            <label>Email
+              <input type="email" name="email" required>
+            </label>
+            <label>Student ID
+              <input type="text" name="sid" required>
+            </label>
+          </div>
+          <div class="grid-3">
+            <label>Preferred Mode
+              <select name="mode" required>
+                <option value="online">Online</option>
+                <option value="phone">Phone</option>
+              </select>
+            </label>
+            <label>Preferred Date
+              <input type="date" name="date" required>
+            </label>
+            <label>Preferred Time
+              <input type="time" name="time" required>
+            </label>
+          </div>
+          <label>Topics (select all that apply)
+            <div class="chips selectable">
+              <label><input type="checkbox" name="topics" value="anxiety"> Anxiety</label>
+              <label><input type="checkbox" name="topics" value="stress"> Stress</label>
+              <label><input type="checkbox" name="topics" value="sleep"> Sleep</label>
+              <label><input type="checkbox" name="topics" value="relationships"> Relationships</label>
+              <label><input type="checkbox" name="topics" value="academics"> Academics</label>
+            </div>
+          </label>
+          <label>Anything you’d like to share (optional)
+            <textarea name="notes" rows="4"></textarea>
+          </label>
+          <button class="btn primary" type="submit">Submit Request</button>
+          <p id="bookMsg" class="success"></p>
+        </form>
+      </div>
+      <div class="panel">
+        <h4>My Upcoming Requests (Demo)</h4>
+        <ul id="myBookings" class="list"></ul>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section id="resources" class="route">
+      <div class="panel">
+        <h3 data-i18n="resources.title">Psychoeducational Resources</h3>
+        <div class="filters">
+          <select id="resLang">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+          <select id="resType">
+            <option value="all">All</option>
+            <option value="video">Video</option>
+            <option value="audio">Audio</option>
+            <option value="guide">Guide</option>
+          </select>
+          <input id="resSearch" type="search" placeholder="Search topic…">
+        </div>
+        <div id="resGrid" class="cards"></div>
+      </div>
+    </section>
+
+    <!-- Peer Support -->
+    <section id="peer" class="route">
+      <div class="yo">
+        <div id="cha" class="panel glass">
+          <h3>Peer Support (Moderated)</h3>
+          <form id="postForm" class="form">
+            <label>Share your thoughts (anonymous)
+              <textarea name="content" rows="3" minlength="10" maxlength="500" required></textarea>
+            </label>
+            <div class="consent">
+              <label><input type="checkbox" name="rules" required> I agree to community rules (be kind, no harm content).</label>
+            </div>
+            <button class="btn" type="submit">Post</button>
+            <p id="postMsg" class="success"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section id="admin" class="route">
+      <div class="panel">
+        <h3>Admin Dashboard (Anonymous Demo)</h3>
+        <div class="grid-3">
+          <div class="stat"><span id="statUsers">0</span><label>Unique Users</label></div>
+          <div class="stat"><span id="statCheckins">0</span><label>Mood Check‑ins</label></div>
+          <div class="stat"><span id="statBookings">0</span><label>Bookings</label></div>
+        </div>
+        <div class="grid-2 charts">
+          <canvas id="moodChart" height="200"></canvas>
+          <canvas id="topicChart" height="200"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="route">
+      <div class="panel">
+        <h3>About the Project</h3>
+        <p>
+          This prototype demonstrates a campus‑tailored mental health platform with regional language support, online counsellor mapping, and anonymous analytics.
+        </p>
+        <details>
+          <summary>Privacy & Safety</summary>
+          <p>This is not a medical device. In emergencies, contact campus helpline or national emergency numbers.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- Crisis Modal -->
+  <dialog id="panicModal" class="modal">
+    <form method="dialog" class="modal-content">
+      <h3>Immediate Help</h3>
+      <p>If you are at risk of harm, please call your local emergency number.</p>
+      <div class="helplines">
+        <div class="help">
+          <strong>India National Helpline</strong>
+          <p>Tele MANAS: 14416 or 1800 891 4416</p>
+        </div>
+        <div class="help">
+          <strong>Campus Counsellor</strong>
+          <p id="counsellorLine">+910000000000</p>
+        </div>
+      </div>
+      <button class="btn">Close</button>
+    </form>
+  </dialog>
+
+  <footer class="site-footer">
+    <div id="ch1" class="container">
+      <p>© <span id="year"></span> Manayush • Built for student well‑being</p>
+    </div>
+  </footer>
+</body>
+</html>
