@@ -17,6 +17,6 @@ It provides quick AI-guided first-aid, booking with campus counsellors, peer sup
 - 🧭 **Crisis Help Modal** - Quick access to helplines in emergencies.
 
 ---
-
+## Project is live at: https://manayush1.netlify.app/
 
 
