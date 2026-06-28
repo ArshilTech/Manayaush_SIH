@@ -4,7 +4,6 @@ Manayush is a **digital mental health and psychological support system** designe
 It provides quick AI-guided first-aid, booking with campus counsellors, peer support, and psychoeducational resources - all in a stigma-free and multilingual interface.
 
 
-
 ---
 
 ## 🌟 Features
@@ -15,8 +14,3 @@ It provides quick AI-guided first-aid, booking with campus counsellors, peer sup
 - 🤝 **Peer Support Board** - Anonymous, moderated student community.  
 - 📊 **Admin Dashboard (Demo)** - View anonymous mood and booking analytics.  
 - 🧭 **Crisis Help Modal** - Quick access to helplines in emergencies.
-
----
-## Project is live at: https://manayush1.netlify.app/
-
-
